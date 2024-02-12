@@ -1,8 +1,16 @@
 # Rigid Subgraphs
 Python implementation of a method to find all maximum infinitesimal rigid subgraphs of 2 and 3 dimensional graphs.
 
+## Setup
+
+The implementation was tested on Python 3.10.
+
+Run `pip install -r requirements.txt` to install dependencies.
+
+## Usage
+
 ## Finding maximum infinitesimal rigid subgraphs in 2D
-*For simplicity, infinitesimal rigidity will be refered to as rigidity in the description of the algothims.*
+*For simplicity, infinitesimal rigidity will be refered to as rigidity in the description of the algorithms.*
 
 In 2D, fixing two points in a rigid graph fixes the whole graph. Our algorithm exploits this property to find maximum rigid subgraphs:
 Since any non-trivial rigid graph contains at least one edge, all maximum rigid subgraphs can be found by fixing a single edge and then detecting all points that can not move as a consequence.
@@ -12,9 +20,9 @@ We can then search through the nullspace of the matrix to find all points that h
 
 By iterating through all edges while skipping those that are already in a maximum rigid subgraph, all maximum rigid subgraphs are found.
 
-![Subgraph and rigidity matrix](Rigid_subgraph_1.png)
-![Fixing an edge](Rigid_subgraph_2.png)
-![Analyzing the nullspace](Rigid_subgraph_3.png)
+![Subgraph and rigidity matrix](images/Rigid_subgraph_1.png)
+![Fixing an edge](images/Rigid_subgraph_2.png)
+![Analyzing the nullspace](images/Rigid_subgraph_3.png)
 
 ## Finding maximum infinitesimal rigid subgraphs in 3D
 In 3D, fixing three points in a rigid graph fixes the whole graph, unless the three points are collinear. We use the same approach as in the 2D case, but use triangles as bases for the subgraphs instead of edges: We find a triangle, set the movement vectors of the points to 0 in the rigidity matrix and detect all fixed points in the nullspace. The resulting set of points defines a maximum rigid subgraph. Finally, we add all edges, that are not part of any subgraph, as 2-element-subgraphs.
@@ -33,9 +41,9 @@ A possible application for the implemented algorithms would be using them in an 
 
 Since these new rigid subgraphs would contain nodes local to the changes, there are more efficient ways of updating the rigid subgraphs than recomputing them all from ground up. On one hand, only these local nodes could be used to find rigid subgraphs through pinning, or the merging approach could be used to merge subgraphs starting from these nodes.
 
-If the merging approach were to be used, it should be refined. The current implementation adds all missing edges to the matrix before computing the new rank, but in most cases one edge would be sufficient. However, there are configurations like the image below for the 2D-case, where a specific additional edge does not reduce the degrees of freedom. Detecting these cases would allow an optimization of the merging approach.
+If the merging approach were to be used, it should be refined. The current implementation adds all missing edges to the matrix before computing the new rank, but in most cases one edge would be sufficient. However, there are configurations where a specific additional edge does not reduce the degrees of freedom. The image below displays such a configuration for the 2D case. Detecting these edge cases would allow an optimization of the merging approach.
 
-![2D Edge case during merging](merging_edge_case.png)
+![2D Edge case during merging](images/merging_edge_case.png)
 
 [Katz et al.](https://publikationen.bibliothek.kit.edu/1000005767) present a method to efficiently merge generically rigid subgraphs to maximum generically rigid subgraphs. If the configuration is not relevant or if this approach could be adapted for infinitesimal rigid subgraphs, the merging approach could be made more efficient.
 
