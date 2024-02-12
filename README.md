@@ -23,7 +23,7 @@ For a 2D graph configuration `graph_config_2d` and a 3D graph configuration `gra
     2d_rigid_subgraphs = max_rigid_subgraphs_2D(graph_config_2d)
     3d_rigid_subgraphs = max_rigid_subgraphs_3D(graph_config_3d, True, True)
 
-The output is a list of maximum rigid subgraphs. 
+The outputs are lists of maximum rigid subgraphs. 
 The second parameter determines the representation of the maximum rigid subgraphs in the output. 
 If it is set to `true`, each graph is represented as a set of the indices of the nodes it includes, 
 otherwise the output is a list of actual subgraphs.
@@ -42,7 +42,7 @@ The first parameter is the graph configuration,
 the second parameter is a list of subgraphs of the configuration represented as a list of sets of node indices, 
 and the third parameter is the dimension of the graph configuration. 
 In the first call, merge_rigid_subgraphs is used to combine rigid subgraphs to maximum rigid subgraphs. 
-In the second call maximum rigid subgraphs are created from edge merges.
+In the second call, maximum rigid subgraphs are created from edge merges.
 
 ## Finding maximum infinitesimal rigid subgraphs in 2D
 
