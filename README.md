@@ -27,6 +27,7 @@ The outputs are lists of maximum rigid subgraphs.
 The second parameter determines the representation of the maximum rigid subgraphs in the output. 
 If it is set to `true`, each graph is represented as a set of the indices of the nodes it includes, 
 otherwise the output is a list of actual subgraphs.
+The third parameter determines whether to assume, that all rigid subgraphs with at least three nodes contain a triangle. Please refer to the algorithm description for more information.
 
 `merge_rigid_subgraphs` can be used like:
 
