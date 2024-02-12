@@ -1,6 +1,8 @@
 # Rigid Subgraphs
 Python implementation of a method to find all maximum infinitesimal rigid subgraphs of 2 and 3 dimensional graphs.
 
+*For simplicity, infinitesimal rigidity will be refered to as rigidity in the description of the algorithms.*
+
 ## Setup
 
 The implementation was tested on Python 3.10.
@@ -9,8 +11,40 @@ Run `pip install -r requirements.txt` to install dependencies.
 
 ## Usage
 
+The implementation includes 3 methods: `max_rigid_subgraphs_2D`, `max_rigid_subgraphs_3D` and `merge_rigid_subgraphs`.
+
+All of these methods work on graph configurations.
+
+For a 2D graph configuration `graph_config_2d` and a 3D graph configuration `graph_config_3d`,
+`max_rigid_subgraphs_2D` and `max_rigid_subgraphs_3D` can be used like:
+
+    from rigid_subgraphs import max_rigid_subgraphs_2D, max_rigid_subgraphs_3D
+
+    2d_rigid_subgraphs = max_rigid_subgraphs_2D(graph_config_2d)
+    3d_rigid_subgraphs = max_rigid_subgraphs_3D(graph_config_3d, True, True)
+
+The output is a list of maximum rigid subgraphs. 
+The second parameter determines the representation of the maximum rigid subgraphs in the output. 
+If it is set to `true`, each graph is represented as a set of the indices of the nodes it includes, 
+otherwise the output is a list of actual subgraphs.
+
+`merge_rigid_subgraphs` can be used like:
+
+    from rigid_subgraphs import merge_rigid_subgraphs
+
+    merged_subgraphs = merge_rigid_subgraphs(graph_config_2d, subgraphs, 2)
+    3d_rigid_subgraphs = merge_rigid_subgraphs(
+                            graph_config_2d, 
+                            [{edge[0], edge[1]} for edge in graph_config_2d.edges], 
+                            3)
+
+The first parameter is the graph configuration, 
+the second parameter is a list of subgraphs of the configuration represented as a list of sets of node indices, 
+and the third parameter is the dimension of the graph configuration. 
+In the first call, merge_rigid_subgraphs is used to combine rigid subgraphs to maximum rigid subgraphs. 
+In the second call maximum rigid subgraphs are created from edge merges.
+
 ## Finding maximum infinitesimal rigid subgraphs in 2D
-*For simplicity, infinitesimal rigidity will be refered to as rigidity in the description of the algorithms.*
 
 In 2D, fixing two points in a rigid graph fixes the whole graph. Our algorithm exploits this property to find maximum rigid subgraphs:
 Since any non-trivial rigid graph contains at least one edge, all maximum rigid subgraphs can be found by fixing a single edge and then detecting all points that can not move as a consequence.
