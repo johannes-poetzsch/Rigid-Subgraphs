@@ -11,3 +11,7 @@ To do that, we first create the rigidity matrix of the graph. To fix an edge, we
 We can then search through the nullspace of the matrix to find all points that have been fixed and add these to the subgraph. Since exactly the points that can not move relative to the edge are added, the found points form a maximum rigid subgraph.
 
 By iterating through all edges while skipping those that are already in a maximum rigid subgraph, all maximum rigid subgraphs are found.
+
+![Subgraph and rigidity matrix](Rigid_subgraph_1.png)
+![Fixing an edge](Rigid_subgraph_2.png)
+![Analyzing the nullspace](Rigid_subgraph_3.png)
